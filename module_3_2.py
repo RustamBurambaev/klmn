@@ -1,11 +1,11 @@
-def send_email(message, recipient, sender='university.help@gmail.com'):
-    if '@' not in recipient or not (recipient.endswith('.com') or recipient.endswith('.ru') or recipient.endswith('.net')):
-        print(f'Невозможно отправить письмо с адреса {sender} на адрес {recipient}')
-    elif '@' not in sender or not (sender.endswith('.com') or sender.endswith('.ru') or sender.endswith('.net')):
+def send_email(message, recipient, *, sender='university.help@gmail.com'):
+    valid_recipient = recipient.endswith(('.com', '.ru', '.net')) and '@' in recipient
+    valid_sender = sender.endswith(('.com', '.ru', '.net')) and '@' in sender
+    if not valid_sender or not valid_recipient:
         print(f'Невозможно отправить письмо с адреса {sender} на адрес {recipient}')
     elif sender == recipient:
         print("Нельзя отправить письмо самому себе!")
-    elif sender == sender:
+    elif sender.endswith('university.help@gmail.com'):
         print(f'Письмо успешно отправлено с адреса {sender} на адрес {recipient}.')
     else:
         print(f'НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса {sender} на адрес {recipient}.')
