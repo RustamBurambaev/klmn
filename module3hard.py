@@ -13,12 +13,14 @@ def isihard(*args):
         if isinstance(i, (list, tuple, set)):
             for j in i:
                 suma += isihard(j)
-        elif isinstance(i, (int)):
-            for j in i:
-                suma += i
-        elif isinstance(i, (str)):
-            for j in i:
-                suma += len(i)
+        elif isinstance(i, int):
+            suma += i
+        elif isinstance(i, str):
+            suma += len(i)
+        elif isinstance(i, dict):
+            for key, value in i.items():
+                suma += isihard(key,value)
+    return suma
 
 
 result = isihard(data_structure)
